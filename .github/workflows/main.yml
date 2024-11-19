@@ -74,7 +74,7 @@ jobs:
           run: |
             cargo check
   
-        - name: Build vTPM-TD
+        - name: Build vTPM-TD (PavanTest)
           env:
             CC: clang
             AR: llvm-ar
