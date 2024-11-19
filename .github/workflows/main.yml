@@ -79,11 +79,11 @@ jobs:
             CC: clang
             AR: llvm-ar
           run: bash sh_script/build.sh
-        
+          
         - name: Find and Move vTPM-TD Binary to Absolute Path
           run: |
             echo "Searching for vtpmtd.bin..."
-            FILE_PATH=$(find . -name "vtpmtd.bin" -type f)
+            FILE_PATH=$(find . -name "vtpmtd.bin" -type f | head -n 1)
             if [ -z "$FILE_PATH" ]; then
               echo "Error: vtpmtd.bin not found!"
               exit 1
