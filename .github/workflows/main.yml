@@ -79,3 +79,22 @@ jobs:
             CC: clang
             AR: llvm-ar
           run: bash sh_script/build.sh
+        
+        - name: Find and Move vTPM-TD Binary to Absolute Path
+          run: |
+            echo "Searching for vtpmtd.bin..."
+            FILE_PATH=$(find . -name "vtpmtd.bin" -type f)
+            if [ -z "$FILE_PATH" ]; then
+              echo "Error: vtpmtd.bin not found!"
+              exit 1
+            fi
+            echo "Moving vtpmtd.bin to /tmp/artifacts..."
+            mkdir -p /tmp/artifacts
+            mv "$FILE_PATH" /tmp/artifacts/vtpmtd.bin
+            echo "File moved successfully to /tmp/artifacts."
+
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: vtpmtd-bin
+            path: /tmp/artifacts/vtpmtd.bin
